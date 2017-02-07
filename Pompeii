@@ -1,0 +1,41 @@
+
+#include <conio.h>
+#include <string>
+#pragma comment(lib, "VCRUNTIME140.dll")
+#include "stdafx.h"
+#using <System.dll>
+
+using namespace System;
+using namespace System::Net;
+using namespace System::Net::Mail;
+using namespace System::Net::Mime;
+using namespace System::Threading;
+using namespace System::ComponentModel;
+using namespace std;
+int main()
+{
+	string words[10];
+	words[0] = "WORDS1";
+	words[1] = "WORDS2";
+	words[2] = "WORDS3";
+
+	SmtpClient ^Smtp = gcnew SmtpClient("smtp.gmail.com", 25);
+	Smtp->Credentials = gcnew NetworkCredential("7ds.slave.1@gmail.com", "7dsport01");
+	Smtp->EnableSsl = true;
+
+	MailMessage ^Message = gcnew MailMessage();
+	Message->From = gcnew MailAddress("issatayev.i@nisa.edu.kz");
+	Message->To->Add(gcnew MailAddress("issatayev.i@nisa.edu.kz"));
+
+	/*String^ att = L"log.txt";
+	Attachment^ log = gcnew Attachment(att, MediaTypeNames::Application::Octet);
+	Message->Attachments->Add(log);*/
+	
+		Message->Subject = "CHECK";
+		Message->Body = "sss";
+		Smtp->Send(Message);
+	
+	
+	
+
+}
